@@ -1,35 +1,63 @@
-const mysql = require('mysql2');
+const { Sequelize } = require('sequelize');
 
-const connection = mysql.createConnection({
+const sequelize = new Sequelize('testdb', 'root', 'Sah123@##', {
     host: 'localhost',
-    user: 'root',
-    password: 'Sah123@##',
-    database: 'testdb'
+    dialect: 'mysql'
 });
 
-connection.connect((error) => {
-    if (error) {
-        console.error('Error connecting to the database:', error);
-        return;
-    }
-    console.log('Connected to the MySQL database.');
+// Test Connection
+sequelize.authenticate()
+    .then(() => console.log("Connected to MySQL via Sequelize"))
+    .catch(err => console.error("Database connection failed:", err));
 
-    const creationQuery = `
-        CREATE TABLE IF NOT EXISTS Student (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            name VARCHAR(255),
-            email VARCHAR(255) unique,
-            age int
-        )
-    `;
+module.exports = sequelize;
 
-    connection.execute(creationQuery, (error) => {
-        if (error) {
-            console.error('Error creating table:', error);
-            return;
-        }
-        console.log('Table created successfully.');
-    });
-});
 
-module.exports = connection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const mysql = require('mysql2');
+
+// const connection = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'Sah123@##',
+//     database: 'testdb'
+// });
+
+// connection.connect((error) => {
+//     if (error) {
+//         console.error('Error connecting to the database:', error);
+//         return;
+//     }
+//     console.log('Connected to the MySQL database.');
+
+//     const creationQuery = `
+//         CREATE TABLE IF NOT EXISTS Student (
+//             id INT PRIMARY KEY AUTO_INCREMENT,
+//             name VARCHAR(255),
+//             email VARCHAR(255) unique,
+//             age int
+//         )
+//     `;
+
+//     connection.execute(creationQuery, (error) => {
+//         if (error) {
+//             console.error('Error creating table:', error);
+//             return;
+//         }
+//         console.log('Table created successfully.');
+//     });
+// });
+
+// module.exports = connection;
