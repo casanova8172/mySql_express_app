@@ -18,7 +18,8 @@ connection.connect((error) => {
         CREATE TABLE IF NOT EXISTS Student (
             id INT PRIMARY KEY AUTO_INCREMENT,
             name VARCHAR(255),
-            email VARCHAR(255)
+            email VARCHAR(255) unique,
+            age int
         )
     `;
 
