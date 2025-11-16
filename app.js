@@ -2,6 +2,7 @@ const express = require('express');
 const sequelize = require('./utils/db-connection');
 //const StudentModel = require('./models/student');
 const studentRoutes = require('./routes/studentRoutes');
+const courseRoutes = require('./routes/courseRoutes');
 
 // models
 require('./models');
@@ -17,9 +18,10 @@ app.get('/', (req, res) => {
 
 
 app.use('/students', studentRoutes);
+app.use('/courses', courseRoutes);
 
 // Sync models (Creates table if not exists)
-sequelize.sync({force: false}).then(() => {
+sequelize.sync({ force: false }).then(() => {
     app.listen(3000, () => {
         console.log(`Server is running on http://localhost:3000`);
     });
