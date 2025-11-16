@@ -1,4 +1,5 @@
 const Student = require("../models/student");
+const IdentityCard = require('../models/identityCard');
 
 // ➤ Add Student
 const addStudent = async (req, res) => {
@@ -91,10 +92,28 @@ const getStudentById = async (req, res) => {
     }
 };
 
+const addValuesToStudentAndIdentityCardTable = async (req, res) => {
+    try {
+        const student = await Student.create(req.body.Student);
+
+        const idCard = await IdentityCard.create({
+            ...req.body.IdentityCard,
+            StudentId: student.id
+        });
+
+        res.status(200).json({ student, idCard });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
 module.exports = {
     addStudent,
     updateStudentById,
     deleteStudentById,
     getAllStudent,
-    getStudentById
+    getStudentById,
+    addValuesToStudentAndIdentityCardTable
 };

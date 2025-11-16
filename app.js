@@ -1,7 +1,11 @@
 const express = require('express');
 const sequelize = require('./utils/db-connection');
-const StudentModel = require('./models/student');
+//const StudentModel = require('./models/student');
 const studentRoutes = require('./routes/studentRoutes');
+
+// models
+require('./models');
+
 
 const app = express();
 app.use(express.json());

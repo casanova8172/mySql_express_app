@@ -15,7 +15,7 @@ const Student = sequelize.define('Student', {
 
     email: {
         type: DataTypes.STRING(255),
-        unique: true,
+        unique: false,
         allowNull: false
     },
 
